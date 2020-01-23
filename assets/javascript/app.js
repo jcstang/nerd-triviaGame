@@ -2,6 +2,17 @@
 
 $(document).ready(function () {
 
+
+  // ================================================
+  // GLOBAL VARIABLES
+  // ================================================
+  var TIME_LIMIT = 5;
+  var TIME_BETWEEN_QUESTIONS = (3 * 1000);  // 1000 = 1 second.
+  var intervalId;
+  var clockRunning = false;
+  // 30 seconds each question
+  var time = TIME_LIMIT;
+
   var questionsForGame = {
     questions: {
       1: {
@@ -23,45 +34,54 @@ $(document).ready(function () {
     }
   };
 
-  start();
+  startTimer();
+
+// ================================================
+// displaying question and answers
+// ================================================
+  // TODO: which one to stick with? Option 1 or Option 2
+  // 
+  // $('#answer-area').append('<li id="answer-a" class="btn btn-secondary">This is some possible answer to question</li>');
+  // vs
+  // this?
+  var myElement = $('<li></li>')
+          .text('This is some possible answer to quetion')
+          .attr('id', 'answer-a')
+          .attr('class', 'btn btn-secondary');
+  $('#answer-area').append(myElement);
+
+var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+
 
 
 // ================================================
-// timer from homework
+// helper functions
 // ================================================
-// setTimeout(fiveSeconds, 5000);
-// setTimeout(tenSeconds, 10000);
-// setTimeout(timeUp, 15000);
+function timesUp() {
+  console.log('times up!!!');
+  stopTimer();
+  setTimeout(reset, TIME_BETWEEN_QUESTIONS);
+}
 
-// function fiveSeconds() {
-//   // in the element with an id of `time-left` add an h2 saying About 10 Seconds Left!
-//   $('#time-left').append('<h2>10 seconds left...</h2>');
+function stopTimer() {
+  clearInterval(intervalId);
+  intervalId = null;
+}
 
-// }
+function countDown() {
+  time--;
+  if (time <= 0) {
+    timesUp();
+  } else {
+    console.log(time);
+  }
 
-// function tenSeconds() {
-//   // in the element with an id of `time-left` add an h2 saying About 5 Seconds Left!
-//   // console log 5 seconds left
-//   $('#time-left').append('<h2>5 seconds left...</h2>');
-// }
+  // console.log(time);
+  // DONE: Use the variable we just created to show the converted time in the "display" div.
+  // $("#display").text(converted);
+}
 
-// function timeUp() {
-//   // in the element with an id of `time-left` add an h2 saying Time's Up!
-//   // console log done
-//   $('#time-left').append('<h2>Times up!</h2>');
-//   // The following line will play the audio file above
-//   audio.play();
-// }
-
-//  Variable that will hold our setInterval that runs the stopwatch
-var intervalId;
-
-// prevents the clock from being sped up unnecessarily
-var clockRunning = false;
-var time = 30;
-var lap = 1;
-
-function start() {
+function startTimer() {
   // DONE: Use setInterval to start the count here and set the clock to running.
   if (!clockRunning) {
     // intervalId = setInterval(count, 1000);
@@ -70,58 +90,38 @@ function start() {
   }
 }
 
-function countDown() {
+function displayCurrentTime() {
+  currentTime = timeConverter(time);
 
-  // DONE: increment time by 1, remember we cant use "this" here.
-  // time++;
-  time--;
-
-  // DONE: Get the current time, pass that into the timeConverter function,
-  //       and save the result in a variable.
-  var converted = timeConverter(time);
-  console.log(time);
-  console.log(converted);
-
-  // DONE: Use the variable we just created to show the converted time in the "display" div.
-  // $("#display").text(converted);
+  $('#display').text(currentTime);
 }
 
-function timeConverter(t) {
-
-  var minutes = Math.floor(t / 60);
-  var seconds = t - (minutes * 60);
-
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-
-  if (minutes === 0) {
-    minutes = "00";
-  }
-  else if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-
-  return minutes + ":" + seconds;
+function reset() {
+  time = TIME_LIMIT;
+  clockRunning = false;
+  startTimer();
+  // displayCurrentTime();
+  // $('#laps').empty();
 }
 
-// ================================================
-// displaying question and answers
-// ================================================
-  //example of object keys
-  // var objKeys = Object.keys(wordGuessGame.wordsToPick);
- 
-  // this?
-  // $('#answer-area').append('<li><button class="btn btn-secondary">button from code</button></li>');
-  // vs
-  // this?
-  var myElement = $('<p></p>')
-          .text('This is some possible answer to quetion')
-          .attr('id', 'answer-a')
-          .attr('class', 'btn btn-secondary');
-  $('#answer-area').append(myElement);
+// function timeConverter(t) {
 
-var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+//   var minutes = Math.floor(t / 60);
+//   var seconds = t - (minutes * 60);
+
+//   if (seconds < 10) {
+//     seconds = "0" + seconds;
+//   }
+
+//   if (minutes === 0) {
+//     minutes = "00";
+//   }
+//   else if (minutes < 10) {
+//     minutes = "0" + minutes;
+//   }
+
+//   return minutes + ":" + seconds;
+// }
 
 
 
