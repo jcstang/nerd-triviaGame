@@ -72,6 +72,7 @@ $(document).ready(function () {
   // helper functions
   // ================================================
   function timesUp() {
+    //TODO: if wrong, or timer ran out. show correct answer
     console.log('times up!!!');
     stopTimer();
     setTimeout(reset, TIME_BETWEEN_QUESTIONS);
@@ -84,10 +85,11 @@ $(document).ready(function () {
 
   function countDown() {
     time--;
-    if (time <= 0) {
+    if (time < 0) {
       timesUp();
     } else {
       console.log(time);
+      $('#timer-area').text('game timer: ' + time);
     }
 
     // console.log(time);
