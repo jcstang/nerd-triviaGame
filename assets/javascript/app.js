@@ -14,129 +14,116 @@ $(document).ready(function () {
   var time = TIME_LIMIT;
   // var intervalThingy;
 
-  var myGameTimer = class GameTime{
-    timeLimit = 30;
-    timeBetween = 10;
-    constructor(timeLimit, timeBetween) {
-      this.timeLimit = timeLimit;
-      this.timeBetweenQuestions = timeBetween;
-      this.intervalId = null;
-      this.clockRunning = false;
-      this.timeLeft = 30;
-    }
-    start() {
-      if(!this.clockRunning) {
-        //this.intervalId = setInterval(this.countDown, 1000);
-        this.intervalId = setInterval(this.countDown, 1000);
-        this.clockRunning = true;
-      }
-    }
+  // var myGameTimer = class GameTime{
+  //   timeLimit = 30;
+  //   timeBetween = 10;
+  //   constructor(timeLimit, timeBetween) {
+  //     this.timeLimit = timeLimit;
+  //     this.timeBetweenQuestions = timeBetween;
+  //     this.intervalId = null;
+  //     this.clockRunning = false;
+  //     this.timeLeft = 30;
+  //   }
+  //   start() {
+  //     if(!this.clockRunning) {
+  //       //this.intervalId = setInterval(this.countDown, 1000);
+  //       this.intervalId = setInterval(this.countDown, 1000);
+  //       this.clockRunning = true;
+  //     }
+  //   }
 
-    stop() {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+  //   stop() {
+  //     clearInterval(this.intervalId);
+  //     this.intervalId = null;
+  //   }
 
-    reset() {
-      this.timeLeft = this.timeLimit;
-      this.clockRunning = false;
-      this.start();
-    }
+  //   reset() {
+  //     this.timeLeft = this.timeLimit;
+  //     this.clockRunning = false;
+  //     this.start();
+  //   }
 
-    countDown() {
-      console.log('countDown');
-      console.log(this.timeLeft);
+  //   countDown() {
+  //     console.log('countDown');
+  //     console.log(this.timeLeft);
 
 
-      this.timeLeft--;
-      if (this.timeLeft <= 0) {
-        this.timesUp();
-      } else {
-        console.log(this.timeLeft);
-      }
-    }
+  //     this.timeLeft--;
+  //     if (this.timeLeft <= 0) {
+  //       this.timesUp();
+  //     } else {
+  //       console.log(this.timeLeft);
+  //     }
+  //   }
 
-    timesUp() {
-      console.log('times up!!');
-      this.stop();
-      setTimeout(this.reset, this.timeBetweenQuestions);
-    }
-  };
+  //   timesUp() {
+  //     console.log('times up!!');
+  //     this.stop();
+  //     setTimeout(this.reset, this.timeBetweenQuestions);
+  //   }
+  // };
 
-  var todaysGame = new myGameTimer(30,10);
-  console.log(todaysGame);
+  // var todaysGame = new myGameTimer(30,10);
+  // console.log(todaysGame);
 
   // class call
   // var todaysGame = new myGameTimer(30, 10);
   // todaysGame.start();
-  myGameTimer.constructor();
-  console.log('hey');
+  // myGameTimer.constructor();
+  // console.log('hey');
 
   // timer class
-  class Timer {
-    timeLimit;
-    timeBetweenQuestions;
-    intervalId;
-    clockRunning;
-    timeLeft;
-    constructor(timeLimit, timeBetween) {
-      this.timeLimit = timeLimit;
-      this.timeBetweenQuestions = timeBetween;
-      this.intervalId = null;
-      this.clockRunning = false;
-      this.timeLeft = 30;
-    }
+  // class Timer {
+  //   timeLimit;
+  //   timeBetweenQuestions;
+  //   intervalId;
+  //   clockRunning;
+  //   timeLeft;
+  //   constructor(timeLimit, timeBetween) {
+  //     this.timeLimit = timeLimit;
+  //     this.timeBetweenQuestions = timeBetween;
+  //     this.intervalId = null;
+  //     this.clockRunning = false;
+  //     this.timeLeft = 30;
+  //   }
 
-    start() {
-      if(!this.clockRunning) {
-        this.intervalId = setInterval(this.countDown, 1000);
-        //intervalThingy = setInterval(this.countDown, 1000);
-        // this.intervalId = setInterval(function() {
-        //   console.log('countDown');
-        //   console.log(this.timeLeft);
-        //   this.timeLeft--;
-        //   if (this.timeLeft <= 0) {
-        //     this.timesUp();
-        //   } else {
-        //     console.log(this.timeLeft);
-        //   }
-        // }, 1000);
+  //   start() {
+  //     if(!this.clockRunning) {
+  //       this.intervalId = setInterval(this.countDown, 1000);
+  //       this.clockRunning = true;
+  //     }
+  //   }
 
-        // setTimeThing(this);
-        this.clockRunning = true;
-      }
-    }
+  //   stop() {
+  //     clearInterval(this.intervalId);
+  //     this.intervalId = null;
+  //   }
 
-    stop() {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+  //   reset() {
+  //     this.timeLeft = this.timeLimit;
+  //     this.clockRunning = false;
+  //     this.start();
+  //   }
 
-    reset() {
-      this.timeLeft = this.timeLimit;
-      this.clockRunning = false;
-      this.start();
-    }
+  //   countDown() {
+  //     console.log('countDown');
+  //     console.log(this.timeLeft);
 
-    countDown() {
-      console.log('countDown');
-      console.log(this.timeLeft);
-      
-      
-      this.timeLeft--;
-      if (this.timeLeft <= 0) {
-        this.timesUp();
-      } else {
-        console.log(this.timeLeft);
-      }
-    }
 
-    timesUp() {
-      console.log('times up!!');
-      this.stop();
-      setTimeout(this.reset, this.timeBetweenQuestions);
-    }
-  };
+  //     this.timeLeft--;
+  //     if (this.timeLeft <= 0) {
+  //       this.timesUp();
+  //     } else {
+  //       console.log(this.timeLeft);
+  //     }
+  //   }
+
+  //   timesUp() {
+  //     console.log('times up!!');
+  //     this.stop();
+  //     setTimeout(this.reset, this.timeBetweenQuestions);
+  //   }
+  // };
 
   // function Run(){
   //   var self = this;
@@ -150,7 +137,7 @@ $(document).ready(function () {
   //   };
   // }
 
- // var run = new Run();
+  // var run = new Run();
 
   //run.start();
 
@@ -159,7 +146,7 @@ $(document).ready(function () {
   // console.log('my object');
   // console.log(myGameTimer);
   // myGameTimer.start();
-  //
+
   // console.log();
 
 
@@ -185,23 +172,27 @@ $(document).ready(function () {
     }
   };
 
+
+
+  // SIMPLE VERSION
   // var gameTimer = {
   //   timeLimit: 30,
   //   timeBetweenQuestions: 3000,
   //   intervalId: null,
   //   clockRunning: false,
   //   timerTime: 30,
-  //
+
   //   start: function () {
   //     if (!this.clockRunning) {
+  //       // FIXME: when countDown gets called, it thinks this = window.
   //       this.intervalId = setInterval(this.countDown, 1000);
   //       this.clockRunning = true;
   //     }
-  //
+
   //     console.log('timerTime');
   //     console.log(this.timerTime);
-  //
-  //
+
+
   //   },
   //   stop: function () {
   //     clearInterval(this.intervalId);
@@ -215,7 +206,7 @@ $(document).ready(function () {
   //   countDown: function () {
   //     this.timerTime--;
   //     console.log('count down');
-  //
+
   //     if (this.timerTime <= 0) {
   //       this.timesUp();
   //     } else {
@@ -227,14 +218,13 @@ $(document).ready(function () {
   //     this.stop();
   //     setTimeout(this.reset, this.timeBetweenQuestions);
   //   }
-  //
-  // };
 
-  // startTimer();
+  // };
 
   // gameTimer.start();
 
-  
+  startTimer();
+
 
   // ================================================
   // displaying question and answers
@@ -262,67 +252,50 @@ $(document).ready(function () {
   // ================================================
   // helper functions
   // ================================================
-  function setTimeThing(obj) {
-    // this.intervalId = setInterval(function() {
-    //   console.log('countDown');
-    //   console.log(this.timeLeft);
-    //   this.timeLeft--;
-    //   if (this.timeLeft <= 0) {
-    //     this.timesUp();
-    //   } else {
-    //     console.log(this.timeLeft);
-    //   }
-    // }
-    // obj.intervalId = setInterval(obj.countDown, 1000);
-    obj.intervalId = setInterval(function(){ obj.countDown();}, 1000);
-    console.log('blah');
 
 
-
+  function timesUp() {
+    console.log('times up!!!');
+    stopTimer();
+    setTimeout(reset, TIME_BETWEEN_QUESTIONS);
   }
-  // function timesUp() {
-  //   console.log('times up!!!');
-  //   stopTimer();
-  //   setTimeout(reset, TIME_BETWEEN_QUESTIONS);
-  // }
 
-  // function stopTimer() {
-  //   clearInterval(intervalId);
-  //   intervalId = null;
-  // }
+  function stopTimer() {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
 
-  // function countDown() {
-  //   time--;
-  //   if (time <= 0) {
-  //     timesUp();
-  //   } else {
-  //     console.log(time);
-  //   }
+  function countDown() {
+    time--;
+    if (time <= 0) {
+      timesUp();
+    } else {
+      console.log(time);
+    }
 
-  //   // console.log(time);
-  //   // DONE: Use the variable we just created to show the converted time in the "display" div.
-  //   // $("#display").text(converted);
-  // }
+    // console.log(time);
+    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    // $("#display").text(converted);
+  }
 
-  // function startTimer() {
-  //   if (!clockRunning) {
-  //     intervalId = setInterval(countDown, 1000);
-  //     clockRunning = true;
-  //   }
-  // }
+  function startTimer() {
+    if (!clockRunning) {
+      intervalId = setInterval(countDown, 1000);
+      clockRunning = true;
+    }
+  }
 
-  // function displayCurrentTime() {
-  //   currentTime = timeConverter(time);
+  function displayCurrentTime() {
+    currentTime = timeConverter(time);
 
-  //   $('#display').text(currentTime);
-  // }
+    $('#display').text(currentTime);
+  }
 
-  // function reset() {
-  //   time = TIME_LIMIT;
-  //   clockRunning = false;
-  //   startTimer();
-  // }
+  function reset() {
+    time = TIME_LIMIT;
+    clockRunning = false;
+    startTimer();
+  }
 
 
 });
-
