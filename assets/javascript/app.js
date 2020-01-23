@@ -12,143 +12,6 @@ $(document).ready(function () {
   var clockRunning = false;
   // 30 seconds each question
   var time = TIME_LIMIT;
-  // var intervalThingy;
-
-  // var myGameTimer = class GameTime{
-  //   timeLimit = 30;
-  //   timeBetween = 10;
-  //   constructor(timeLimit, timeBetween) {
-  //     this.timeLimit = timeLimit;
-  //     this.timeBetweenQuestions = timeBetween;
-  //     this.intervalId = null;
-  //     this.clockRunning = false;
-  //     this.timeLeft = 30;
-  //   }
-  //   start() {
-  //     if(!this.clockRunning) {
-  //       //this.intervalId = setInterval(this.countDown, 1000);
-  //       this.intervalId = setInterval(this.countDown, 1000);
-  //       this.clockRunning = true;
-  //     }
-  //   }
-
-  //   stop() {
-  //     clearInterval(this.intervalId);
-  //     this.intervalId = null;
-  //   }
-
-  //   reset() {
-  //     this.timeLeft = this.timeLimit;
-  //     this.clockRunning = false;
-  //     this.start();
-  //   }
-
-  //   countDown() {
-  //     console.log('countDown');
-  //     console.log(this.timeLeft);
-
-
-  //     this.timeLeft--;
-  //     if (this.timeLeft <= 0) {
-  //       this.timesUp();
-  //     } else {
-  //       console.log(this.timeLeft);
-  //     }
-  //   }
-
-  //   timesUp() {
-  //     console.log('times up!!');
-  //     this.stop();
-  //     setTimeout(this.reset, this.timeBetweenQuestions);
-  //   }
-  // };
-
-  // var todaysGame = new myGameTimer(30,10);
-  // console.log(todaysGame);
-
-  // class call
-  // var todaysGame = new myGameTimer(30, 10);
-  // todaysGame.start();
-  // myGameTimer.constructor();
-  // console.log('hey');
-
-  // timer class
-  // class Timer {
-  //   timeLimit;
-  //   timeBetweenQuestions;
-  //   intervalId;
-  //   clockRunning;
-  //   timeLeft;
-  //   constructor(timeLimit, timeBetween) {
-  //     this.timeLimit = timeLimit;
-  //     this.timeBetweenQuestions = timeBetween;
-  //     this.intervalId = null;
-  //     this.clockRunning = false;
-  //     this.timeLeft = 30;
-  //   }
-
-  //   start() {
-  //     if(!this.clockRunning) {
-  //       this.intervalId = setInterval(this.countDown, 1000);
-  //       this.clockRunning = true;
-  //     }
-  //   }
-
-  //   stop() {
-  //     clearInterval(this.intervalId);
-  //     this.intervalId = null;
-  //   }
-
-  //   reset() {
-  //     this.timeLeft = this.timeLimit;
-  //     this.clockRunning = false;
-  //     this.start();
-  //   }
-
-  //   countDown() {
-  //     console.log('countDown');
-  //     console.log(this.timeLeft);
-
-
-  //     this.timeLeft--;
-  //     if (this.timeLeft <= 0) {
-  //       this.timesUp();
-  //     } else {
-  //       console.log(this.timeLeft);
-  //     }
-  //   }
-
-  //   timesUp() {
-  //     console.log('times up!!');
-  //     this.stop();
-  //     setTimeout(this.reset, this.timeBetweenQuestions);
-  //   }
-  // };
-
-  // function Run(){
-  //   var self = this;
-  //
-  //   self.start = function(){
-  //     self.interval = setInterval(function() { self.draw(); },1000);
-  //   };
-  //
-  //   self.draw = function(){
-  //     //some code
-  //   };
-  // }
-
-  // var run = new Run();
-
-  //run.start();
-
-
-  // var myGameTimer = new Timer(30, 5);
-  // console.log('my object');
-  // console.log(myGameTimer);
-  // myGameTimer.start();
-
-  // console.log();
-
 
   // TODO: fill out the questions more.
   var questionsForGame = {
@@ -174,56 +37,11 @@ $(document).ready(function () {
 
 
 
-  // SIMPLE VERSION
-  // var gameTimer = {
-  //   timeLimit: 30,
-  //   timeBetweenQuestions: 3000,
-  //   intervalId: null,
-  //   clockRunning: false,
-  //   timerTime: 30,
-
-  //   start: function () {
-  //     if (!this.clockRunning) {
-  //       // FIXME: when countDown gets called, it thinks this = window.
-  //       this.intervalId = setInterval(this.countDown, 1000);
-  //       this.clockRunning = true;
-  //     }
-
-  //     console.log('timerTime');
-  //     console.log(this.timerTime);
-
-
-  //   },
-  //   stop: function () {
-  //     clearInterval(this.intervalId);
-  //     this.intervalId = null;
-  //   },
-  //   reset: function () {
-  //     this.timerTime = this.timeLimit;
-  //     this.clockRunning = false;
-  //     this.start();
-  //   },
-  //   countDown: function () {
-  //     this.timerTime--;
-  //     console.log('count down');
-
-  //     if (this.timerTime <= 0) {
-  //       this.timesUp();
-  //     } else {
-  //       console.log(this.timerTime);
-  //     }
-  //   },
-  //   timesUp: function () {
-  //     console.log('times up!!!');
-  //     this.stop();
-  //     setTimeout(this.reset, this.timeBetweenQuestions);
-  //   }
-
-  // };
-
-  // gameTimer.start();
-
+  // ================================================
+  // START OF GAME
+  // ================================================
   startTimer();
+
 
 
   // ================================================
@@ -249,11 +67,10 @@ $(document).ready(function () {
 
 
 
+
   // ================================================
   // helper functions
   // ================================================
-
-
   function timesUp() {
     console.log('times up!!!');
     stopTimer();
