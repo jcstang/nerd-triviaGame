@@ -13,6 +13,7 @@ $(document).ready(function () {
   // 30 seconds each question
   var time = TIME_LIMIT;
 
+  // TODO: fill out the questions more.
   var questionsForGame = {
     questions: {
       1: {
@@ -39,11 +40,6 @@ $(document).ready(function () {
 // ================================================
 // displaying question and answers
 // ================================================
-  // TODO: which one to stick with? Option 1 or Option 2
-  // 
-  // $('#answer-area').append('<li id="answer-a" class="btn btn-secondary">This is some possible answer to question</li>');
-  // vs
-  // this?
   var myElement = $('<li></li>')
           .text('This is some possible answer to quetion')
           .attr('id', 'answer-a')
@@ -51,6 +47,16 @@ $(document).ready(function () {
   $('#answer-area').append(myElement);
 
 var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+
+// TODO: how to go thru questionsForGame, and display 1 quesiton.
+
+// TODO: check if, user answered wrong, time ran out, or user answered correct.
+// TODO: if, correct, then display new question.
+// TODO: if incorrect or time ran out, display correct answer (kinda new page).
+// TODO: keep track of how many the user answered correctly.
+
+// TODO: when is the end of the game. When it is, display results.
+// maybe reset button to play again?
 
 
 
@@ -82,9 +88,7 @@ function countDown() {
 }
 
 function startTimer() {
-  // DONE: Use setInterval to start the count here and set the clock to running.
   if (!clockRunning) {
-    // intervalId = setInterval(count, 1000);
     intervalId = setInterval(countDown, 1000);
     clockRunning = true;
   }
@@ -100,29 +104,7 @@ function reset() {
   time = TIME_LIMIT;
   clockRunning = false;
   startTimer();
-  // displayCurrentTime();
-  // $('#laps').empty();
 }
-
-// function timeConverter(t) {
-
-//   var minutes = Math.floor(t / 60);
-//   var seconds = t - (minutes * 60);
-
-//   if (seconds < 10) {
-//     seconds = "0" + seconds;
-//   }
-
-//   if (minutes === 0) {
-//     minutes = "00";
-//   }
-//   else if (minutes < 10) {
-//     minutes = "0" + minutes;
-//   }
-
-//   return minutes + ":" + seconds;
-// }
-
 
 
 });
