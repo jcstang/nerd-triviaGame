@@ -1,6 +1,7 @@
 
 
-$(document).ready(function() {
+$(document).ready(function () {
+
   var wordGuessGame = {
     wordsToPick: {
       genesis: {
@@ -17,35 +18,27 @@ $(document).ready(function() {
 
   };
 
-    var listOfQuestions = [
-      {
-        id: 1,
-        question: "Who is the strongest?",
+  var questionsForGame = {
+    questions: {
+      1: {
+        question: "Who is who?",
         answers: {
-          a: "Superman",
-          b: "he Terminator",
-          c: "Waluigi, obviously"
+          a: "superman",
+          b: "spiderman"
         },
-        correctAnswer: "c",
-  
+        correctAnswer: "c"
+      },
+      2: {
+        question: "Blah blah?",
+        answers: {
+          a: "blah",
+          b: "spiderman"
+        },
+        correctAnswer: "b"
       }
-    ];
+    }
+  };
 
-
-    // console.log(listOfQuestions.question["Who is the strongest?"].answers.a);
-    console.log(listOfQuestions[0].question);
-    console.log(listOfQuestions[0].answers);
-    console.log(listOfQuestions[0].id);
-    
-    var objKeys = Object.keys(wordGuessGame.wordsToPick);
-    console.log(objKeys);
-    console.log(objKeys[0]);
-    var selectedKey = objKeys[0];
-    console.log(wordGuessGame.wordsToPick[selectedKey]);
-    
-    
-    // this.wordInPlay = objKeys[Math.floor(Math.random() * objKeys.length)];
-    
 
 
 
