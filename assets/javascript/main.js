@@ -3,7 +3,6 @@
 
 $(document).ready(function () {
 
-
   // ================================================
   // GLOBAL VARIABLES
   // ================================================
@@ -15,29 +14,68 @@ $(document).ready(function () {
   var time = TIME_LIMIT;
 
   // TODO: fill out the questions more.
-  var questionsForGame = {
-    questions: {
-      1: {
-        question: "Who is who?",
-        answers: {
-          a: "superman",
-          b: "spiderman"
-        },
-        correctAnswer: "c"
+  // var questionsForGame = {
+  //   questions: {
+  //     1: {
+  //       question: "Who is who?",
+  //       answers: {
+  //         a: "superman",
+  //         b: "spiderman"
+  //       },
+  //       correctAnswer: "c"
+  //     },
+  //     2: {
+  //       question: "Blah blah?",
+  //       answers: {
+  //         a: "blah",
+  //         b: "spiderman"
+  //       },
+  //       correctAnswer: "b"
+  //     }
+  //   }
+  // };
+
+
+
+  // maybe model the quesitons after this
+  // myQuestions[0].answers["a"]; //returns Superman
+  // myQuestions[0].question; // returns "who is....etc"
+  const myQuestions = [
+    {
+      question: "Who is the strongest?",
+      answers: {
+        a: "Superman",
+        b: "The Terminator",
+        c: "Waluigi, obviously"
       },
-      2: {
-        question: "Blah blah?",
-        answers: {
-          a: "blah",
-          b: "spiderman"
-        },
-        correctAnswer: "b"
-      }
+      correctAnswer: "c"
+    },
+    {
+      question: "What is the best site ever created?",
+      answers: {
+        a: "SitePoint",
+        b: "Simple Steps Code",
+        c: "Trick question; they're both the best"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Where is Waldo really?",
+      answers: {
+        a: "Antarctica",
+        b: "Exploring the Pacific Ocean",
+        c: "Sitting in a tree",
+        d: "Minding his own business, so stop asking"
+      },
+      correctAnswer: "d"
     }
-  };
+  ];
+
+  console.log(questionsForGame.questions);
+  
 
   // this one works!
-  startTimer();
+  // startTimer();
 
 
   // ================================================
