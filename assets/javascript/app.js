@@ -98,6 +98,7 @@ $(document).ready(function () {
   }
 
   function startTimer() {
+    // $('#question-area').text()
     if (!clockRunning) {
       intervalId = setInterval(countDown, 1000);
       clockRunning = true;
