@@ -81,9 +81,6 @@ $(document).ready(function () {
   // ================================================
   // helper functions
   // ================================================
-  function endOfRoundHandler() {
-    //stuff
-  }
 
   function timesUp() {
     //TODO: if wrong, or timer ran out. show correct answer
