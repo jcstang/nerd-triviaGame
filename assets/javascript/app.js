@@ -12,11 +12,13 @@ $(document).ready(function () {
   var clockRunning = false;
   // 30 seconds each question
   var time = TIME_LIMIT;
+  var playerScore = 0;
 
   //displaying questions
   var whatQuestionAreWeOn = 0;
   var selectedQuestion;
   var currAnswers;
+  var currCorrectAnswer;
 
   // TODO: fill out the questions more.
   let questionsForGame = [
@@ -50,46 +52,67 @@ $(document).ready(function () {
   // ================================================
   // START OF GAME
   // ================================================
-  startTimer();
+  // 1 & 2.
+  $('#start-game').on('click', function() {
+    startTimer();
+  });
 
 
 
   // ================================================
   // displaying question and answers
   // ================================================
-  // var myElement = $('<li></li>')
-  //   .text('This is some possible answer to quetion')
-  //   .attr('id', 'answer-a')
-  //   .attr('class', 'btn btn-secondary');
-  // $('#answer-area').append(myElement);
 
-  // var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+  // TODO: pseudo code
+  // EVENT 
+  // 1a.
+  // want to start game? click start button
+  // 1b. 
+  // display a question, and answers
+  // 2. 
+  // start timer to count down
 
-  // TODO: how to go thru questionsForGame, and display 1 quesiton.
+  // EVENT
+  // 3. time ran out, click of answer
+  // reset timer??
+  // on click of an answer
+    // is it the right answer?
+    // if yes, display correct answer and say good job. score++
+    // if incorrect, display correct answer and say too bad. 
 
-  // TODO: check if, user answered wrong, time ran out, or user answered correct.
-  // TODO: if, correct, then display new question. score++.
-  // TODO: if incorrect or time ran out, display correct answer (kinda new page).
-  // TODO: keep track of how many the user answered correctly.
+  // EVENT
+  // 4. cooldown timer runs out. 
+  // DISPLAY new question. if more quesitons in array.
+  // if no more questions, display end of game page.
 
-  // TODO: when is the end of the game. When it is, display results.
-  // maybe reset button to play again?
-
-
+  // EVENT
+  // 5. end of game, cool cool cool
+  // reset button to restart game?
 
 
   // ================================================
-  // helper functions
+  // EVENTS
+  // ================================================
+  // add events here
+
+
+  // ================================================
+  // HELPER FUNCTIONS
   // ================================================
 
   function timesUp() {
     //TODO: if wrong, or timer ran out. show correct answer
+    // if answer wrong display wrong message
+    // if answer correct display good message
+    // if clicked answer === questionsForGame[0].correctAnswer
+    
+
     console.log('times up!!!');
-    stopTimer();
-    // TODO: check for end of game
-    if (whatQuestionAreWeOn < questionsForGame.length) {
-      setInterval(reset, TIME_BETWEEN_QUESTIONS);
-    }
+    // stopTimer();
+    // // TODO: check for end of game
+    // if (whatQuestionAreWeOn < questionsForGame.length) {
+    //   setInterval(reset, TIME_BETWEEN_QUESTIONS);
+    // }
   }
 
   function stopTimer() {
@@ -106,9 +129,6 @@ $(document).ready(function () {
       $('#timer-area').text('game timer: ' + time);
     }
 
-    // console.log(time);
-    // DONE: Use the variable we just created to show the converted time in the "display" div.
-    // $("#display").text(converted);
   }
 
   function startTimer() {
@@ -147,10 +167,13 @@ $(document).ready(function () {
   function displayNextQuestion() {
     $('#question-area').empty();
     $('#answer-area').empty();
-    console.log('number: ' + whatQuestionAreWeOn + ' lenght: ' + questionsForGame.length);
+    console.log('number: ' + whatQuestionAreWeOn + ' length: ' + questionsForGame.length);
 
     if ( whatQuestionAreWeOn <= questionsForGame.length ) {
       
+      currCorrectAnswer = questionsForGame[whatQuestionAreWeOn].correctAnswer;
+      console.log('here is currCorrectAnswer: ' + currCorrectAnswer);
+
       selectedQuestion = questionsForGame[whatQuestionAreWeOn].question;
       console.log('selected question: ' + selectedQuestion);
       
@@ -158,28 +181,34 @@ $(document).ready(function () {
       console.log('what question are we on? ' + whatQuestionAreWeOn);
       $('#question-area').text( selectedQuestion );
 
-      // TODO: figure out how to cycle thru a-d.
       // some questions have a,b,c some have a,b,c,d
       if ( currAnswers['a'] ) {
-        console.log('has an a');
+        // console.log('has an a');
         displayAnswers( currAnswers['a'], 'a');
       }
       if ( currAnswers['b'] ) {
-        console.log('has a b');
+        // console.log('has a b');
         displayAnswers( currAnswers['b'], 'b');
       }
       if ( currAnswers['c'] ) {
-        console.log('has a c');
+        // console.log('has a c');
         displayAnswers( currAnswers['c'], 'c');
       }
       if ( currAnswers['d'] ) {
-        console.log('has a d');
+        // console.log('has a d');
         displayAnswers( currAnswers['d'], 'd');
       }
 
       whatQuestionAreWeOn++;
     }
   }
+
+  function startNewGame(){
+    // resetScore()
+    // setTimer(5, 3000)
+    // getPlayerNames()
+    // etc....
+}
 
 
 });
