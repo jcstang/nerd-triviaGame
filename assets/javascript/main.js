@@ -6,88 +6,111 @@ $(document).ready(function () {
   // ================================================
   // GLOBAL VARIABLES
   // ================================================
-  var TIME_LIMIT = 6;
-  var TIME_BETWEEN_QUESTIONS = (3 * 1000);  // 1000 = 1 second.
+  const TIME_LIMIT = 6; // num of seconds.
+  const TIME_BETWEEN_QUESTIONS = (3 * 1000);  // 1000 = 1 second.
   var intervalId = setInterval(this.countDown, 1000);
   var clockRunning = false;
-  // 30 seconds each question
   var time = TIME_LIMIT;
+  var whatQuestionAreWeOn = 0;
+
+  //displaying questions
+  var selectedQuestion;
+  var currAnswers;
 
   // TODO: fill out the questions more.
-  // var questionsForGame = {
-  //   questions: {
-  //     1: {
-  //       question: "Who is who?",
-  //       answers: {
-  //         a: "superman",
-  //         b: "spiderman"
-  //       },
-  //       correctAnswer: "c"
-  //     },
-  //     2: {
-  //       question: "Blah blah?",
-  //       answers: {
-  //         a: "blah",
-  //         b: "spiderman"
-  //       },
-  //       correctAnswer: "b"
-  //     }
-  //   }
-  // };
-
-
-
-  // maybe model the quesitons after this
-  // myQuestions[0].answers["a"]; //returns Superman
-  // myQuestions[0].question; // returns "who is....etc"
-  const myQuestions = [
+  let questionsForGame = [
     {
-      question: "Who is the strongest?",
+      question: "Who is gandalf?",
       answers: {
-        a: "Superman",
-        b: "The Terminator",
-        c: "Waluigi, obviously"
+        a: "one of the hobbit guys.",
+        b: 'a wizard',
+        c: 'Say what?...'
       },
-      correctAnswer: "c"
+      answersLength: 3,
+      correctAnswer: 'b'
     },
     {
-      question: "What is the best site ever created?",
+      question: "Where did Harry Potter live outside of school?",
       answers: {
-        a: "SitePoint",
-        b: "Simple Steps Code",
-        c: "Trick question; they're both the best"
+        a: 'hogwarts',
+        b: 'some island',
+        c: 'Say what?...',
+        d: 'with the Durselys'
       },
-      correctAnswer: "c"
-    },
-    {
-      question: "Where is Waldo really?",
-      answers: {
-        a: "Antarctica",
-        b: "Exploring the Pacific Ocean",
-        c: "Sitting in a tree",
-        d: "Minding his own business, so stop asking"
-      },
-      correctAnswer: "d"
+      answersLength: 4,
+      correctAnswer: 'b'
     }
   ];
+  // myQuestions[0].answers["a"]; //returns Superman
+  // myQuestions[0].question; // returns "who is....etc"
 
-  console.log(questionsForGame.questions);
-  
 
   // this one works!
   // startTimer();
+
+  function displayNextQuestion() {
+    $('#question-area').empty();
+    $('#answer-area').empty();
+
+    console.log('number: ' + whatQuestionAreWeOn + ' lenght: ' + questionsForGame.length);
+    if ( whatQuestionAreWeOn <= questionsForGame.length ) {
+      
+      selectedQuestion = questionsForGame[whatQuestionAreWeOn].question;
+      console.log('selected question: ' + selectedQuestion);
+      
+      currAnswers = questionsForGame[whatQuestionAreWeOn].answers;
+      console.log('what question are we on? ' + whatQuestionAreWeOn);
+      $('#question-area').text( selectedQuestion );
+
+      // TODO: figure out how to cycle thru a-d.
+      // some questions have a,b,c some have a,b,c,d
+
+      if ( currAnswers['a'] ) {
+        console.log('has an a');
+        displayAnswers( currAnswers['a'], 'a');
+      }
+      if ( currAnswers['b'] ) {
+        console.log('has a b');
+        displayAnswers('why?', 'b');
+      }
+      if ( currAnswers['c'] ) {
+        console.log('has a c');
+        displayAnswers('how?', 'c');
+      }
+      if ( currAnswers['d'] ) {
+        console.log('has a d');
+        displayAnswers('when?', 'd');
+      }
+
+      whatQuestionAreWeOn++;
+    }
+
+  }
+
+  function displayAnswers(myQuestion, letter) {
+    var myElement = $('<li></li>')
+            .text(myQuestion)
+            .attr('id', 'answer-' + letter)
+            .attr('class', 'btn btn-secondary');
+    $('#answer-area').append(myElement);
+  }
+
+
 
 
   // ================================================
   // displaying question and answers
   // ================================================
-  var myElement = $('<li></li>')
-    .text('This is some possible answer to quetion')
-    .attr('id', 'answer-a')
-    .attr('class', 'btn btn-secondary');
-  $('#answer-area').append(myElement);
+  // var myElement = $('<li></li>')
+  //   .text('This is some possible answer to quetion')
+  //   .attr('id', 'answer-a')
+  //   .attr('class', 'btn btn-secondary');
+  // $('#answer-area').append(myElement);
 
-  var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+  // var currQuestion = $('#question-area').text('When does a cup become a bucket?');
+  displayNextQuestion();
+  displayNextQuestion();
+  // displayNextQuestion();
 
   // TODO: how to go thru questionsForGame, and display 1 quesiton.
 
