@@ -1,5 +1,21 @@
 // main.js
 // playing around with different ways to solve the problem
+// got some weird bug
+
+// ================================================
+// DO NOT USE - too buggy. use app.js instead.
+// ================================================
+
+
+
+
+
+
+
+
+
+
+
 
 $(document).ready(function () {
 
@@ -11,9 +27,9 @@ $(document).ready(function () {
   var intervalId = setInterval(this.countDown, 1000);
   var clockRunning = false;
   var time = TIME_LIMIT;
-  var whatQuestionAreWeOn = 0;
-
+  
   //displaying questions
+  var whatQuestionAreWeOn = 0;
   var selectedQuestion;
   var currAnswers;
 
@@ -46,7 +62,7 @@ $(document).ready(function () {
 
 
   // this one works!
-  // startTimer();
+  startTimer();
 
   function displayNextQuestion() {
     $('#question-area').empty();
@@ -71,15 +87,15 @@ $(document).ready(function () {
       }
       if ( currAnswers['b'] ) {
         console.log('has a b');
-        displayAnswers('why?', 'b');
+        displayAnswers( currAnswers['b'], 'b');
       }
       if ( currAnswers['c'] ) {
         console.log('has a c');
-        displayAnswers('how?', 'c');
+        displayAnswers( currAnswers['c'], 'c');
       }
       if ( currAnswers['d'] ) {
         console.log('has a d');
-        displayAnswers('when?', 'd');
+        displayAnswers( currAnswers['d'], 'd');
       }
 
       whatQuestionAreWeOn++;
@@ -110,7 +126,6 @@ $(document).ready(function () {
   // var currQuestion = $('#question-area').text('When does a cup become a bucket?');
   displayNextQuestion();
   displayNextQuestion();
-  // displayNextQuestion();
 
   // TODO: how to go thru questionsForGame, and display 1 quesiton.
 
@@ -130,12 +145,17 @@ $(document).ready(function () {
   function timesUp() {
     console.log('times up!!!');
     stopTimer();
-    setTimeout(reset, TIME_BETWEEN_QUESTIONS);
+
+    // TODO: check for end of game
+    if (true) {
+      setInterval(reset, TIME_BETWEEN_QUESTIONS);
+    }
   }
 
   function stopTimer() {
     clearInterval(intervalId);
     intervalId = null;
+    // displayNextQuestion();
   }
 
   function countDown() {
@@ -143,8 +163,9 @@ $(document).ready(function () {
     if (time <= 0) {
       timesUp();
     } else {
-      console.log('helper function call');
+      // console.log('helper function call');
       console.log(time);
+      $('#timer-area').text('Game timer: ' + time);
     }
 
     // console.log(time);
@@ -153,19 +174,22 @@ $(document).ready(function () {
   }
 
   function startTimer() {
+    
     if (!clockRunning) {
+      displayNextQuestion();
       intervalId = setInterval(countDown, 1000);
       clockRunning = true;
     }
   }
 
-  function displayCurrentTime() {
-    currentTime = timeConverter(time);
+  // function displayCurrentTime() {
+  //   currentTime = timeConverter(time);
 
-    $('#display').text(currentTime);
-  }
+  //   $('#display').text(currentTime);
+  // }
 
   function reset() {
+    whatQuestionAreWeOn = 0;
     time = TIME_LIMIT;
     clockRunning = false;
     startTimer();
