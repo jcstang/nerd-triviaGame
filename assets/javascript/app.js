@@ -1,4 +1,4 @@
-
+// the original stab at the problem
 
 $(document).ready(function () {
 
