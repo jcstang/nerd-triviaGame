@@ -8,7 +8,6 @@ let questionsForGame = [
       b: 'a wizard',
       c: 'Say what?...'
     },
-    answersLength: 3,
     correctAnswer: 'b'
   },
   {
@@ -19,8 +18,17 @@ let questionsForGame = [
       c: 'Say what?...',
       d: 'with the Durselys'
     },
-    answersLength: 4,
     correctAnswer: 'd'
+  },
+  {
+    question: "Who is my 3 year old daughter's favorite Doctor?",
+    answers: {
+      a: 'Peter Capaldi',
+      b: 'Matt Smith',
+      c: 'David Tennant',
+      d: 'Jodie Whittaker'
+    },
+    correctAnswer: 'c'
   }
 ];
 
@@ -30,8 +38,6 @@ var currListOfAnswers = [];
 
 
 $(document).ready(function () {
-  // run the stuff here. 
-  // load questions
 
   // ===============================================
   // GAME START
@@ -83,19 +89,15 @@ $(document).ready(function () {
     // console.log(event);
     console.log('you chose: ' + event.target.classList[3]);
     console.log('curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
+    var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
+    var chosenAnswer = event.target.classList[3];
+
+    if ( correctAnswer === chosenAnswer) {
+      console.log('winner!');
+    } else {
+      console.log('looooooooser!');
+    }
   }
-
-  // function answerHandler(letter) {
-  //   var theCorrectAnswer = questionsForGame[whatQuestion].correctAnswer;
-  //   console.log('you chose: ' + letter + ' correct answer: ' + theCorrectAnswer);
-
-  //   if ( theCorrectAnswer === letter) {
-  //     console.log('winner!');
-  //   } else {
-  //     console.log('loser!');
-  //   }
-
-  // }
 
   function startTriviaGame() {
     createButton('a');
@@ -146,8 +148,6 @@ $(document).ready(function () {
 
   function changeText(letter, theAnswer) {
     $('.' + letter).text();
-
-
     $('.' + letter).text(letter + '. ' + theAnswer);
   }
 
