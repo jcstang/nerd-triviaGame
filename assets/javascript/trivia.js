@@ -42,7 +42,11 @@ $(document).ready(function () {
   // ===============================================
   // EVENTS
   // ===============================================
-  $('#answer-a').on('click', function(event) {
+  $('#start-game').on('click', function() {
+    nextQuestion();
+  });
+
+  $('.a').on('click', function(event) {
     answerHandler('a');
   });
 
@@ -76,10 +80,8 @@ $(document).ready(function () {
   }
 
   function startTriviaGame() {
-    // load the question
-    // load the answers
-    // start the timer
     loadQuestionAndAnswers();
+    // start the timer
   }
 
 
@@ -87,6 +89,8 @@ $(document).ready(function () {
     clearGameArea();
 
     var currentQuestion = questionsForGame[whatQuestion];
+    console.log(currentQuestion);
+    
 
     $('#question-area').text(currentQuestion.question);
 
@@ -123,7 +127,8 @@ $(document).ready(function () {
 
   
   function clearGameArea() {
-    $('#question-area').empty();
+    // FIXME: 2nd question not clickable
+    // $('#question-area').empty();
     $('#answer-area').empty();
   }
 
