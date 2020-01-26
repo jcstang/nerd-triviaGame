@@ -48,12 +48,10 @@ $(document).ready(function () {
   // ===============================================
   // EVENTS
   // ===============================================
-  // FIXME: event listener disappers on load of 2nd question
   $('#start-game').on('click', function() {
     nextQuestion();
   });
 
-  // FIXME: might need to change back to ids
   $('.a').on('click', function(event) {
     // answerHandler('a');
     answerHandler(event);
@@ -89,9 +87,34 @@ $(document).ready(function () {
 
     if ( correctAnswer === chosenAnswer) {
       console.log('winner!');
+      // var myMessage = $('<div>');
+      // // myMessage.addClass('alert alert-success').text('Yay!! you win!!!');
+      // // $('.message').prepend( myMessage );
+      // // $('.message').alert();
+
+      // // dismissable
+      // myMessage.addClass('alert alert-success alert-dismissible fade show')
+      //   .text('Yay! that is correct!')
+      //   .append('<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>');
+      
+      // $('.message').prepend(myMessage);
+
+      prependNewMessage('alert-success', 'Yay! you win!');
+      
+
     } else {
       console.log('looooooooser!');
+      prependNewMessage('alert-danger', 'Thats going to be a NOPE!');
     }
+  }
+
+  function prependNewMessage(type, message) {
+    var myMessage = $('<div>');
+    myMessage.addClass('alert ' + type + ' alert-dismissible fade show')
+        .text(message)
+        .append('<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>');
+      
+      $('.message').prepend(myMessage);
   }
 
   function startTriviaGame() {
