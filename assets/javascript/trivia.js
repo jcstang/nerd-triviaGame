@@ -33,8 +33,10 @@ $(document).ready(function () {
   // run the stuff here. 
   // load questions
 
+  // ===============================================
   // GAME START
-  loadQuestionAndAnswers();
+  // ===============================================
+  startTriviaGame();
 
 
   // ===============================================
@@ -44,6 +46,7 @@ $(document).ready(function () {
     // load the question
     // load the answers
     // start the timer
+    loadQuestionAndAnswers();
   }
 
 
@@ -54,18 +57,30 @@ $(document).ready(function () {
 
     $('#question-area').text(currentQuestion.question);
 
-    if (currentQuestion.answers['a']) {
-      //display answer a
-      // $('#answer-area').append('A. a frog.');
-      var newAnswer = $('<li>')
-        .text('A. ' + currentQuestion.answers['a'])
-        .attr('id', 'answer-a')
-        .addClass('btn btn-secondary');
-      $('#answer-area').append(newAnswer);
+    var listOfAnswers = currentQuestion.answers;
+    if (listOfAnswers['a']) {
+      displayAnswer('a', listOfAnswers['a']);
+    }
+    if (listOfAnswers['b']) {
+      displayAnswer('b', listOfAnswers['b']);
+    }
+    if (listOfAnswers['c']) {
+      displayAnswer('c', listOfAnswers['c']);
+    }
+    if (listOfAnswers['d']) {
+      displayAnswer('d', listOfAnswers['d']);
     }
 
     //keeps track of where we are at in the array. 
     whatQuestion++;
+  }
+
+  function displayAnswer(letter, theAnswer) {
+    var newAnswer = $('<li>')
+        .text(letter + '. ' + theAnswer)
+        .attr('id', 'answer-' + letter)
+        .addClass('btn btn-secondary');
+      $('#answer-area').append(newAnswer);
   }
 
   
