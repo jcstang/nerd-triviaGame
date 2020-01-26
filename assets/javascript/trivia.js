@@ -50,12 +50,19 @@ $(document).ready(function () {
   function loadQuestionAndAnswers() {
     clearGameArea();
 
-    var currentQuestionObject = questionsForGame[whatQuestion];
-    var currentQuestion = currentQuestionObject.question;
+    var currentQuestion = questionsForGame[whatQuestion];
 
-    $('#question-area').text(currentQuestion);
+    $('#question-area').text(currentQuestion.question);
 
-    console.log('see the size of answer array ' + currentQuestion.answers.length);
+    if (currentQuestion.answers['a']) {
+      //display answer a
+      // $('#answer-area').append('A. a frog.');
+      var newAnswer = $('<li>')
+        .text('A. ' + currentQuestion.answers['a'])
+        .attr('id', 'answer-a')
+        .addClass('btn btn-secondary');
+      $('#answer-area').append(newAnswer);
+    }
 
     //keeps track of where we are at in the array. 
     whatQuestion++;
