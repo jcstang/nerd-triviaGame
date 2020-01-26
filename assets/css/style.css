@@ -10,8 +10,13 @@
 }
 
 .timer {
-  background-color: lightpink;
+  /* background-color: lightpink; */
   float: right;
   text-align: center;
   font-size: xx-large;
+  padding: 10px;
+}
+
+.head {
+  padding-bottom: 10px;
 }
