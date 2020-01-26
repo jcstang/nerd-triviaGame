@@ -47,6 +47,7 @@ $(document).ready(function () {
     nextQuestion();
   });
 
+  // FIXME: might need to change back to ids
   $('#a').on('click', function(event) {
     answerHandler('a');
   });
@@ -61,6 +62,11 @@ $(document).ready(function () {
 
   $('#d').on('click', function(event) {
     answerHandler('d');
+  });
+
+  $('.answer').on('click', function() {
+    console.log('answer log');
+    console.log(event);
   });
 
 
@@ -88,12 +94,13 @@ $(document).ready(function () {
 
   function nextQuestion() {
     whatQuestion++;
+    clearGameArea();
     loadQuestionAndAnswers();
   }
 
 
   function loadQuestionAndAnswers() {
-    clearGameArea();
+    // clearGameArea();
 
     var currentQuestion = questionsForGame[whatQuestion];
     console.log(currentQuestion);
@@ -123,7 +130,7 @@ $(document).ready(function () {
     var newAnswer = $('<p>')
         .text(letter + '. ' + theAnswer)
         .attr('id', letter)
-        .addClass('btn btn-secondary ' + letter);
+        .addClass('btn btn-secondary answer ' + letter);
       $('#answer-area').append(newAnswer);
 
   }
@@ -131,7 +138,9 @@ $(document).ready(function () {
   function clearGameArea() {
     // FIXME: 2nd question not clickable
     $('#question-area').empty();
-    $('#answer-area').empty();
+    // $('#answer-area').empty();
+    // $('#answer-area').detach();
+    $('.answer').detach();
   }
 
 
