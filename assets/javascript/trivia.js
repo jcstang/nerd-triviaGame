@@ -42,23 +42,24 @@ $(document).ready(function () {
   // ===============================================
   // EVENTS
   // ===============================================
+  // FIXME: event listener disappers on load of 2nd question
   $('#start-game').on('click', function() {
     nextQuestion();
   });
 
-  $('.a').on('click', function(event) {
+  $('#a').on('click', function(event) {
     answerHandler('a');
   });
 
-  $('#answer-b').on('click', function(event) {
+  $('#b').on('click', function(event) {
     answerHandler('b');
   });
 
-  $('#answer-c').on('click', function(event) {
+  $('#c').on('click', function(event) {
     answerHandler('c');
   });
 
-  $('#answer-d').on('click', function(event) {
+  $('#d').on('click', function(event) {
     answerHandler('d');
   });
 
@@ -66,7 +67,8 @@ $(document).ready(function () {
 
   // ===============================================
   // HELPER FUNCTIONS
-  // ===============================================
+  // ==============================================
+
   function answerHandler(letter) {
     var theCorrectAnswer = questionsForGame[whatQuestion].correctAnswer;
     console.log('you chose: ' + letter + ' correct answer: ' + theCorrectAnswer);
@@ -82,6 +84,11 @@ $(document).ready(function () {
   function startTriviaGame() {
     loadQuestionAndAnswers();
     // start the timer
+  }
+
+  function nextQuestion() {
+    whatQuestion++;
+    loadQuestionAndAnswers();
   }
 
 
@@ -113,22 +120,17 @@ $(document).ready(function () {
   }
 
   function displayAnswer(letter, theAnswer) {
-    var newAnswer = $('<li>')
+    var newAnswer = $('<p>')
         .text(letter + '. ' + theAnswer)
-        .attr('id', 'answer-' + letter)
+        .attr('id', letter)
         .addClass('btn btn-secondary ' + letter);
       $('#answer-area').append(newAnswer);
-  }
 
-  function nextQuestion() {
-    whatQuestion++;
-    loadQuestionAndAnswers();
   }
-
   
   function clearGameArea() {
     // FIXME: 2nd question not clickable
-    // $('#question-area').empty();
+    $('#question-area').empty();
     $('#answer-area').empty();
   }
 
