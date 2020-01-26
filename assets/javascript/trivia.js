@@ -74,11 +74,6 @@ $(document).ready(function () {
     answerHandler(event);
   });
 
-  // $('.answer').on('click', function() {
-  //   console.log('answer log');
-  //   console.log(event);
-  // });
-
 
 
   // ===============================================
@@ -87,8 +82,8 @@ $(document).ready(function () {
 
   function answerHandler(event) {
     // console.log(event);
-    console.log('you chose: ' + event.target.classList[3]);
-    console.log('curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
+    // console.log('you chose: ' + event.target.classList[3]);
+    console.log('you chose: ' + event.target.classList[3] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
     var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
     var chosenAnswer = event.target.classList[3];
 
@@ -110,9 +105,23 @@ $(document).ready(function () {
 
   function nextQuestion() {
     whatQuestion++;
-    console.log('whatQuestion line 101: ' + whatQuestion);
-    clearGameArea();
-    loadQuestionAndAnswers();
+    // console.log('whatQuestion: ' + whatQuestion);
+    console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
+    if (whatQuestion < questionsForGame.length) {
+      clearGameArea();
+      loadQuestionAndAnswers();
+    } else {
+      // console.log('end of game?');
+      endOfGameHandler();
+    }
+  }
+
+  
+  function endOfGameHandler() {
+    // clear questions and answers
+    // display reset button.
+    // display results of game. score, etc.
+    console.log("I'm the end of game handler.");
   }
 
 
@@ -120,10 +129,11 @@ $(document).ready(function () {
     // clearGameArea();
 
     var currentQuestion = questionsForGame[whatQuestion];
-    console.log(currentQuestion);
+    // console.log(currentQuestion);
 
     $('#question-area').text(currentQuestion.question);
 
+    // checking if available answers go a-d or a-c
     var listOfAnswers = currentQuestion.answers;
     if (listOfAnswers['a']) {
       // displayAnswer('a', listOfAnswers['a']);

@@ -8,3 +8,10 @@
 * {
   /* style all of the things */
 }
+
+.timer {
+  background-color: lightpink;
+  float: right;
+  text-align: center;
+  font-size: xx-large;
+}
