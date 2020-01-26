@@ -8,7 +8,9 @@ $(document).ready(function () {
   // ================================================
   var TIME_LIMIT = 5;
   var TIME_BETWEEN_QUESTIONS = (3 * 1000);  // 1000 = 1 second.
-  var intervalId = setInterval(this.countDown, 1000);
+  // var intervalId = setInterval(this.countDown, 1000);
+  var intervalId = null;
+
   var clockRunning = false;
   // 30 seconds each question
   var time = TIME_LIMIT;
@@ -53,7 +55,7 @@ $(document).ready(function () {
   // START OF GAME
   // ================================================
   // 1 & 2.
-  $('#start-game').on('click', function() {
+  $('#start-game').on('click', function () {
     startTimer();
   });
 
@@ -76,9 +78,11 @@ $(document).ready(function () {
   // 3. time ran out, click of answer
   // reset timer??
   // on click of an answer
-    // is it the right answer?
-    // if yes, display correct answer and say good job. score++
-    // if incorrect, display correct answer and say too bad. 
+  // is it the right answer?
+  // if yes, display correct answer and say good job. score++
+  // if incorrect, display correct answer and say too bad. 
+
+  // restart round function
 
   // EVENT
   // 4. cooldown timer runs out. 
@@ -99,20 +103,37 @@ $(document).ready(function () {
   // ================================================
   // HELPER FUNCTIONS
   // ================================================
+  // function start() {
+  //   var i = 0;
+  //   intervalId = setInterval(function () {
+  //     console.log(i);
+  //     i++;
+  //   }, 1000);
+  // }
+  // function stop() {
+  //   clearInterval(intervalId);
+  //   intervalId = null;
+  // }
+  // end of teachers function
+
+
+
+
+
 
   function timesUp() {
     //TODO: if wrong, or timer ran out. show correct answer
     // if answer wrong display wrong message
     // if answer correct display good message
     // if clicked answer === questionsForGame[0].correctAnswer
-    
+
 
     console.log('times up!!!');
-    // stopTimer();
+    stopTimer();
     // // TODO: check for end of game
-    // if (whatQuestionAreWeOn < questionsForGame.length) {
-    //   setInterval(reset, TIME_BETWEEN_QUESTIONS);
-    // }
+    if (whatQuestionAreWeOn < questionsForGame.length) {
+      setInterval(reset, TIME_BETWEEN_QUESTIONS);
+    }
   }
 
   function stopTimer() {
@@ -134,11 +155,12 @@ $(document).ready(function () {
   function startTimer() {
     // $('#question-area').text()
     // TODO: check for end of array
-    if ( whatQuestionAreWeOn < questionsForGame.length) {
+    if (whatQuestionAreWeOn < questionsForGame.length) {
       displayNextQuestion();
     }
 
     if (!clockRunning) {
+      clearInterval(intervalId);
       intervalId = setInterval(countDown, 1000);
       clockRunning = true;
     }
@@ -158,57 +180,60 @@ $(document).ready(function () {
 
   function displayAnswers(myQuestion, letter) {
     var myElement = $('<li></li>')
-            .text(myQuestion)
-            .attr('id', 'answer-' + letter)
-            .attr('class', 'btn btn-secondary');
+      .text(myQuestion)
+      .attr('id', 'answer-' + letter)
+      .attr('class', 'btn btn-secondary');
     $('#answer-area').append(myElement);
   }
 
+  // loadquesiton, resets timer, and displays h2 question, and loops thru answers
+
   function displayNextQuestion() {
+    // reset content
     $('#question-area').empty();
     $('#answer-area').empty();
     console.log('number: ' + whatQuestionAreWeOn + ' length: ' + questionsForGame.length);
 
-    if ( whatQuestionAreWeOn <= questionsForGame.length ) {
-      
+    if (whatQuestionAreWeOn <= questionsForGame.length) {
+
       currCorrectAnswer = questionsForGame[whatQuestionAreWeOn].correctAnswer;
       console.log('here is currCorrectAnswer: ' + currCorrectAnswer);
 
       selectedQuestion = questionsForGame[whatQuestionAreWeOn].question;
       console.log('selected question: ' + selectedQuestion);
-      
+
       currAnswers = questionsForGame[whatQuestionAreWeOn].answers;
       console.log('what question are we on? ' + whatQuestionAreWeOn);
-      $('#question-area').text( selectedQuestion );
+      $('#question-area').text(selectedQuestion);
 
       // some questions have a,b,c some have a,b,c,d
-      if ( currAnswers['a'] ) {
+      if (currAnswers['a']) {
         // console.log('has an a');
-        displayAnswers( currAnswers['a'], 'a');
+        displayAnswers(currAnswers['a'], 'a');
       }
-      if ( currAnswers['b'] ) {
+      if (currAnswers['b']) {
         // console.log('has a b');
-        displayAnswers( currAnswers['b'], 'b');
+        displayAnswers(currAnswers['b'], 'b');
       }
-      if ( currAnswers['c'] ) {
+      if (currAnswers['c']) {
         // console.log('has a c');
-        displayAnswers( currAnswers['c'], 'c');
+        displayAnswers(currAnswers['c'], 'c');
       }
-      if ( currAnswers['d'] ) {
+      if (currAnswers['d']) {
         // console.log('has a d');
-        displayAnswers( currAnswers['d'], 'd');
+        displayAnswers(currAnswers['d'], 'd');
       }
 
       whatQuestionAreWeOn++;
     }
   }
 
-  function startNewGame(){
+  function startNewGame() {
     // resetScore()
     // setTimer(5, 3000)
     // getPlayerNames()
     // etc....
-}
+  }
 
 
 });
