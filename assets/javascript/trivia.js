@@ -40,8 +40,41 @@ $(document).ready(function () {
 
 
   // ===============================================
+  // EVENTS
+  // ===============================================
+  $('#answer-a').on('click', function(event) {
+    answerHandler('a');
+  });
+
+  $('#answer-b').on('click', function(event) {
+    answerHandler('b');
+  });
+
+  $('#answer-c').on('click', function(event) {
+    answerHandler('c');
+  });
+
+  $('#answer-d').on('click', function(event) {
+    answerHandler('d');
+  });
+
+
+
+  // ===============================================
   // HELPER FUNCTIONS
   // ===============================================
+  function answerHandler(letter) {
+    var theCorrectAnswer = questionsForGame[whatQuestion].correctAnswer;
+    console.log('you chose: ' + letter + ' correct answer: ' + theCorrectAnswer);
+
+    if ( theCorrectAnswer === letter) {
+      console.log('winner!');
+    } else {
+      console.log('loser!');
+    }
+
+  }
+
   function startTriviaGame() {
     // load the question
     // load the answers
@@ -72,15 +105,20 @@ $(document).ready(function () {
     }
 
     //keeps track of where we are at in the array. 
-    whatQuestion++;
+    // whatQuestion++;
   }
 
   function displayAnswer(letter, theAnswer) {
     var newAnswer = $('<li>')
         .text(letter + '. ' + theAnswer)
         .attr('id', 'answer-' + letter)
-        .addClass('btn btn-secondary');
+        .addClass('btn btn-secondary ' + letter);
       $('#answer-area').append(newAnswer);
+  }
+
+  function nextQuestion() {
+    whatQuestion++;
+    loadQuestionAndAnswers();
   }
 
   
@@ -88,6 +126,9 @@ $(document).ready(function () {
     $('#question-area').empty();
     $('#answer-area').empty();
   }
+
+
+
 
 });
 
