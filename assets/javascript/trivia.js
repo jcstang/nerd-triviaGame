@@ -153,7 +153,7 @@ $(document).ready(function () {
     // display results of game. score, etc.
     console.log("I'm the end of game handler.");
     //TODO: clear the div and replace with end of game div
-    $('#main-container')
+    // $('#main-container')
   }
 
 
