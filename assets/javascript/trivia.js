@@ -1,12 +1,16 @@
-// TODO: fill out the questions more.
+// Trivia.js
+// Jacob Stanger
+// Jan 2020
 
+// TODO: fill out the questions more.
 let questionsForGame = [
   {
     question: "Who is gandalf?",
     answers: {
       a: "one of the hobbit guys.",
       b: 'a wizard',
-      c: 'Say what?...'
+      c: 'Say what?...',
+      d: 'idk, something Lord of The Rings'
     },
     correctAnswer: 'b'
   },
@@ -29,6 +33,16 @@ let questionsForGame = [
       d: 'Jodie Whittaker'
     },
     correctAnswer: 'c'
+  },
+  {
+    question: "In Star Wars, What powers ligthsabers?"
+    answers: {
+      a: 'Midichlorians',
+      b: 'kyber crystals',
+      c: 'the force',
+      d: 'force crystals',
+    },
+    correctAnswer: 'b'
   }
 ];
 
