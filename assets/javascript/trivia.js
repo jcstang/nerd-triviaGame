@@ -49,6 +49,7 @@ let questionsForGame = [
 var userScore = 0;
 var whatQuestion = 0;
 var currListOfAnswers = [];
+var isQuestionAnswered = false;
 
 
 $(document).ready(function () {
@@ -62,26 +63,26 @@ $(document).ready(function () {
   // ===============================================
   // EVENTS
   // ===============================================
-  $('#start-game').on('click', function() {
+  $('#start-game').on('click', function () {
     nextQuestion();
   });
 
-  $('.a').on('click', function(event) {
+  $('.a').on('click', function (event) {
     // answerHandler('a');
     answerHandler(event);
   });
 
-  $('.b').on('click', function(event) {
+  $('.b').on('click', function (event) {
     // answerHandler('b');
     answerHandler(event);
   });
 
-  $('.c').on('click', function(event) {
+  $('.c').on('click', function (event) {
     // answerHandler('c');
     answerHandler(event);
   });
 
-  $('.d').on('click', function(event) {
+  $('.d').on('click', function (event) {
     // answerHandler('d');
     answerHandler(event);
   });
@@ -93,25 +94,27 @@ $(document).ready(function () {
   // ==============================================
 
   function answerHandler(event) {
-    // console.log(event);
-    console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
-    var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
-    //FIXME: it's pulling up btn-lg instead of 'a'
-    // var chosenAnswer = event.target.classList[3];
-    var chosenAnswer = event.target.classList[5];
+    if (!isQuestionAnswered) {
+      isQuestionAnswered = true;
+      console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
+      var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
+      //FIXME: it's pulling up btn-lg instead of 'a'
+      // var chosenAnswer = event.target.classList[3];
+      var chosenAnswer = event.target.classList[5];
 
-    if ( correctAnswer === chosenAnswer) {
-      console.log('winner!');
-      userScore++;
-      console.log('user score: ' + userScore);
-      prependNewMessage('alert-success', 'Yay! you win!');
-      setTimeout(nextQuestion, 1000);
-      
-    } else {
-      console.log('looooooooser!');
-      prependNewMessage('alert-danger', 'Thats going to be a NOPE!');
-      setTimeout(nextQuestion, 1000);
+      if (correctAnswer === chosenAnswer) {
+        console.log('winner!');
+        userScore++;
+        console.log('user score: ' + userScore);
+        prependNewMessage('alert-success', 'Yay! you win!');
+        setTimeout(nextQuestion, 5 * 1000);
 
+      } else {
+        console.log('looooooooser!');
+        prependNewMessage('alert-danger', 'NOPE! correct answer: ' + questionsForGame[whatQuestion].correctAnswer);
+        setTimeout(nextQuestion, 5 * 1000);
+
+      }
     }
   }
 
@@ -119,13 +122,18 @@ $(document).ready(function () {
   function prependNewMessage(type, message) {
     var myMessage = $('<div>');
     myMessage.addClass('alert ' + type + ' alert-dismissible fade show')
-        .text(message)
-        .append('<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>');
-      
-      $('.message').prepend(myMessage);
+      .text(message)
+      .append('<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>');
+
+    $('.message').prepend(myMessage);
   }
 
   function startTriviaGame() {
+    userScore = 0;
+    whatQuestion = 0;
+    currListOfAnswers = [];
+    isQuestionAnswered = false;
+
     createButton('a');
     createButton('b');
     createButton('c');
@@ -135,6 +143,10 @@ $(document).ready(function () {
   }
 
   function nextQuestion() {
+    //TODO: auto dismiss alert
+    $('.alert').alert('close');
+
+    isQuestionAnswered = false;
     whatQuestion++;
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
@@ -146,14 +158,26 @@ $(document).ready(function () {
     }
   }
 
-  
+
   function endOfGameHandler() {
     // clear questions and answers
     // display reset button.
     // display results of game. score, etc.
     console.log("I'm the end of game handler.");
     //TODO: clear the div and replace with end of game div
-    // $('#main-container')
+    var endOfGameDiv = $('<div>');
+    endOfGameDiv.addClass('container');
+    var scoreH1 = $('<h1 class="end-game-div" > Game over! you scored: ' + userScore + '</h1>');
+    endOfGameDiv.append(scoreH1);
+    $('#main-container').empty();
+    $('#main-container').append(endOfGameDiv);
+
+    var resetBtn = $('<button>')
+      .addClass('btn btn-outline-info')
+      .attr('type', 'button')
+      .text('Reset Game?');
+    endOfGameDiv.append(resetBtn);
+
   }
 
 
@@ -168,40 +192,38 @@ $(document).ready(function () {
     // checking if available answers go a-d or a-c
     var listOfAnswers = currentQuestion.answers;
     if (listOfAnswers['a']) {
-      // displayAnswer('a', listOfAnswers['a']);
       changeText('a', listOfAnswers['a']);
     }
     if (listOfAnswers['b']) {
-      // displayAnswer('b', listOfAnswers['b']);
       changeText('b', listOfAnswers['b']);
     }
     if (listOfAnswers['c']) {
-      // displayAnswer('c', listOfAnswers['c']);
       changeText('c', listOfAnswers['c']);
     }
     if (listOfAnswers['d']) {
-      // displayAnswer('d', listOfAnswers['d']);
       changeText('d', listOfAnswers['d']);
     }
 
-    //keeps track of where we are at in the array. 
-    // whatQuestion++;
   }
 
   function changeText(letter, theAnswer) {
     $('.' + letter).text();
     $('.' + letter).text(letter + '. ' + theAnswer);
+
   }
+
 
   function createButton(letter) {
     var newAnswer = $('<p>').addClass('btn btn-secondary answer btn-lg btn-block ' + letter)
       .attr('id', letter);
     $('#answer-area').append(newAnswer);
+
   }
 
-  
+
   function clearGameArea() {
     $('#question-area').empty();
+
   }
 
 
