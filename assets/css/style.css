@@ -20,3 +20,8 @@
 .head {
   padding-bottom: 10px;
 }
+
+h5 {
+  text-align: center;
+  font-size: small;
+}

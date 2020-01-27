@@ -7,7 +7,7 @@ let questionsForGame = [
   {
     question: "Who is gandalf?",
     answers: {
-      a: "one of the hobbit guys.",
+      a: "one of the hobbit guys",
       b: 'a wizard',
       c: 'Say what?...',
       d: 'idk, something Lord of The Rings'
@@ -102,6 +102,8 @@ $(document).ready(function () {
 
     if ( correctAnswer === chosenAnswer) {
       console.log('winner!');
+      userScore++;
+      console.log('user score: ' + userScore);
       prependNewMessage('alert-success', 'Yay! you win!');
       setTimeout(nextQuestion, 1000);
       
@@ -150,6 +152,8 @@ $(document).ready(function () {
     // display reset button.
     // display results of game. score, etc.
     console.log("I'm the end of game handler.");
+    //TODO: clear the div and replace with end of game div
+    $('#main-container')
   }
 
 
@@ -195,14 +199,6 @@ $(document).ready(function () {
     $('#answer-area').append(newAnswer);
   }
 
-  // function displayAnswer(letter, theAnswer) {
-  //   var newAnswer = $('<p>')
-  //       .text(letter + '. ' + theAnswer)
-  //       .attr('id', letter)
-  //       .addClass('btn btn-secondary answer ' + letter);
-  //     $('#answer-area').append(newAnswer);
-
-  // }
   
   function clearGameArea() {
     $('#question-area').empty();
