@@ -35,7 +35,7 @@ let questionsForGame = [
     correctAnswer: 'c'
   },
   {
-    question: "In Star Wars, What powers ligthsabers?"
+    question: "In Star Wars, What powers ligthsabers?",
     answers: {
       a: 'Midichlorians',
       b: 'kyber crystals',
@@ -94,33 +94,25 @@ $(document).ready(function () {
 
   function answerHandler(event) {
     // console.log(event);
-    // console.log('you chose: ' + event.target.classList[3]);
-    console.log('you chose: ' + event.target.classList[3] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
+    console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
     var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
-    var chosenAnswer = event.target.classList[3];
+    //FIXME: it's pulling up btn-lg instead of 'a'
+    // var chosenAnswer = event.target.classList[3];
+    var chosenAnswer = event.target.classList[5];
 
     if ( correctAnswer === chosenAnswer) {
       console.log('winner!');
-      // var myMessage = $('<div>');
-      // // myMessage.addClass('alert alert-success').text('Yay!! you win!!!');
-      // // $('.message').prepend( myMessage );
-      // // $('.message').alert();
-
-      // // dismissable
-      // myMessage.addClass('alert alert-success alert-dismissible fade show')
-      //   .text('Yay! that is correct!')
-      //   .append('<button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>');
-      
-      // $('.message').prepend(myMessage);
-
       prependNewMessage('alert-success', 'Yay! you win!');
+      setTimeout(nextQuestion, 1000);
       
-
     } else {
       console.log('looooooooser!');
       prependNewMessage('alert-danger', 'Thats going to be a NOPE!');
+      setTimeout(nextQuestion, 1000);
+
     }
   }
+
 
   function prependNewMessage(type, message) {
     var myMessage = $('<div>');
@@ -142,7 +134,6 @@ $(document).ready(function () {
 
   function nextQuestion() {
     whatQuestion++;
-    // console.log('whatQuestion: ' + whatQuestion);
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
       clearGameArea();
@@ -199,7 +190,8 @@ $(document).ready(function () {
   }
 
   function createButton(letter) {
-    var newAnswer = $('<p>').addClass('btn btn-secondary answer ' + letter);
+    var newAnswer = $('<p>').addClass('btn btn-secondary answer btn-lg btn-block ' + letter)
+      .attr('id', letter);
     $('#answer-area').append(newAnswer);
   }
 
