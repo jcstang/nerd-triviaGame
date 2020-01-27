@@ -123,7 +123,7 @@ $(document).ready(function () {
     createButton('c');
     createButton('d');
     loadQuestionAndAnswers();
-    // start the timer
+    // TODO: start the timer
   }
 
   function nextQuestion() {
@@ -199,11 +199,7 @@ $(document).ready(function () {
   // }
   
   function clearGameArea() {
-    // FIXME: 2nd question not clickable
     $('#question-area').empty();
-    // $('#answer-area').empty();
-    // $('#answer-area').detach();
-    // $('.answer').detach();
   }
 
 
