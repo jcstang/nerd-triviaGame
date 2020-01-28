@@ -184,7 +184,7 @@ $(document).ready(function () {
         console.log('user score: ' + userScore);
         prependNewMessage('alert-success', 'Yay! you win!');
         setTimeout(nextQuestion, 1.2 * 1000);
-        resetTimer();
+        // resetTimer();
 
       } else {
         console.log('looooooooser!');
