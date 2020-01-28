@@ -79,7 +79,7 @@ var saveThisDiv;
 
 //timer stuff
 var intervalId = null;
-var time = 0;
+var time = 11;
 
 $(document).ready(function () {
 
@@ -115,14 +115,65 @@ $(document).ready(function () {
 
   }
 
+  // ===============================================
+  // TIMER LOGIC
+  // ===============================================
+  function count() {
+    time--;
+    displayCurrentTime();
+
+    if (time < 1) {
+      console.log('Out of time, I guess...');
+      prependNewMessage('alert-danger', 'OUT OF TIME!!!!');
+      stopTimer();
+      setTimeout(nextQuestion, 1.2 * 1000);
+    }
+  }
+
+  function displayCurrentTime() {
+    $('.timer').text(time);
+  }
+
+
+  function startTimer() {
+    // var oneSecondInMilliseconds = 1000;
+    // not sure what this means
+    // var clockIsNotRunning = intervalId === null;
+
+    // if (clockIsNotRunning) {
+    //   intervalId = setInterval(function () {
+    //     count();
+    //   }, oneSecondInMilliseconds);
+    // }
+
+    intervalId = setInterval(count, 1 * 1000);
+
+  }
+
+  function stopTimer() {
+
+    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
+    clearInterval(intervalId);
+    clockRunning = false;
+  }
+
+  function resetTimer() {
+    time = 11;
+    startTimer();
+  }
+
+
+
 
   // ===============================================
   // HELPER FUNCTIONS
-  // ==============================================
-  
+  // ===============================================
+
   function answerHandler(event) {
     if (!isQuestionAnswered) {
       isQuestionAnswered = true;
+      // stop timer
+      stopTimer();
       console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
       var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
       var chosenAnswer = event.target.classList[5];
@@ -132,16 +183,20 @@ $(document).ready(function () {
         userScore++;
         console.log('user score: ' + userScore);
         prependNewMessage('alert-success', 'Yay! you win!');
-        setTimeout(nextQuestion, 1 * 1000);
+        setTimeout(nextQuestion, 1.2 * 1000);
+        resetTimer();
 
       } else {
         console.log('looooooooser!');
         prependNewMessage('alert-danger', 'NOPE! correct answer: ' + questionsForGame[whatQuestion].correctAnswer);
-        setTimeout(nextQuestion, 1 * 1000);
+        setTimeout(nextQuestion, 1.2 * 1000);
+        resetTimer();
 
       }
     }
   }
+
+
 
 
   function prependNewMessage(type, message) {
@@ -166,6 +221,7 @@ $(document).ready(function () {
     createButton('d');
     loadQuestionAndAnswers();
     // TODO: start the timer
+    startTimer();
   }
 
   function nextQuestion() {
@@ -174,6 +230,9 @@ $(document).ready(function () {
 
     isQuestionAnswered = false;
     whatQuestion++;
+
+    resetTimer();
+    
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
       clearGameArea();
@@ -287,6 +346,6 @@ $(document).ready(function () {
 
 
 
-// end of document.ready
+  // end of document.ready
 });
 
