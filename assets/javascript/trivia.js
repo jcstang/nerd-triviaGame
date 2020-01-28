@@ -3,6 +3,49 @@
 // Jan 2020
 
 // TODO: fill out the questions more.
+// let questionsForGame = [
+//   {
+//     question: "Who is gandalf?",
+//     answers: {
+//       a: "one of the hobbit guys",
+//       b: 'a wizard',
+//       c: 'Say what?...',
+//       d: 'idk, something Lord of The Rings'
+//     },
+//     correctAnswer: 'b'
+//   },
+//   {
+//     question: "Where did Harry Potter live outside of school?",
+//     answers: {
+//       a: 'hogwarts',
+//       b: 'some island',
+//       c: 'Say what?...',
+//       d: 'with the Durselys'
+//     },
+//     correctAnswer: 'd'
+//   },
+//   {
+//     question: "Who is my 3 year old daughter's favorite Doctor?",
+//     answers: {
+//       a: 'Peter Capaldi',
+//       b: 'Matt Smith',
+//       c: 'David Tennant',
+//       d: 'Jodie Whittaker'
+//     },
+//     correctAnswer: 'c'
+//   },
+//   {
+//     question: "In Star Wars, What powers ligthsabers?",
+//     answers: {
+//       a: 'Midichlorians',
+//       b: 'kyber crystals',
+//       c: 'the force',
+//       d: 'force crystals',
+//     },
+//     correctAnswer: 'b'
+//   }
+// ];
+
 let questionsForGame = [
   {
     question: "Who is gandalf?",
@@ -23,26 +66,6 @@ let questionsForGame = [
       d: 'with the Durselys'
     },
     correctAnswer: 'd'
-  },
-  {
-    question: "Who is my 3 year old daughter's favorite Doctor?",
-    answers: {
-      a: 'Peter Capaldi',
-      b: 'Matt Smith',
-      c: 'David Tennant',
-      d: 'Jodie Whittaker'
-    },
-    correctAnswer: 'c'
-  },
-  {
-    question: "In Star Wars, What powers ligthsabers?",
-    answers: {
-      a: 'Midichlorians',
-      b: 'kyber crystals',
-      c: 'the force',
-      d: 'force crystals',
-    },
-    correctAnswer: 'b'
   }
 ];
 
@@ -69,26 +92,29 @@ $(document).ready(function () {
   });
 
   
+  function setClickEvents() {
+    $('.a').on('click', function (event) {
+      // answerHandler('a');
+      answerHandler(event);
+    });
+  
+    $('.b').on('click', function (event) {
+      // answerHandler('b');
+      answerHandler(event);
+    });
+  
+    $('.c').on('click', function (event) {
+      // answerHandler('c');
+      answerHandler(event);
+    });
+  
+    $('.d').on('click', function (event) {
+      // answerHandler('d');
+      answerHandler(event);
+    });
 
-  $('.a').on('click', function (event) {
-    // answerHandler('a');
-    answerHandler(event);
-  });
+  }
 
-  $('.b').on('click', function (event) {
-    // answerHandler('b');
-    answerHandler(event);
-  });
-
-  $('.c').on('click', function (event) {
-    // answerHandler('c');
-    answerHandler(event);
-  });
-
-  $('.d').on('click', function (event) {
-    // answerHandler('d');
-    answerHandler(event);
-  });
 
 
 
@@ -134,7 +160,7 @@ $(document).ready(function () {
   }
 
   function startTriviaGame() {
-    console.log('inside of startTriviaGame');
+    console.log('startTriviaGame()');
     userScore = 0;
     whatQuestion = 0;
     currListOfAnswers = [];
@@ -190,10 +216,10 @@ $(document).ready(function () {
     //TODO: connect logic to reset button
     $('#reset-game').on('click', function() {
       console.log('reset-game button pressed');
-      // createDiv();
-      console.log('saveThisDiv');
-      console.log(saveThisDiv);
-      $('.game-body').append(saveThisDiv);
+      createDiv();
+      // console.log('saveThisDiv');
+      // console.log(saveThisDiv);
+      // $('.game-body').append(saveThisDiv);
       startTriviaGame();
     });
   }
@@ -221,8 +247,7 @@ $(document).ready(function () {
 
 
   function loadQuestionAndAnswers() {
-    // clearGameArea();
-
+    setClickEvents();
     var currentQuestion = questionsForGame[whatQuestion];
     // console.log(currentQuestion);
 
@@ -262,6 +287,7 @@ $(document).ready(function () {
 
   function clearGameArea() {
     $('#question-area').empty();
+    $('.progress').empty();
 
   }
 
