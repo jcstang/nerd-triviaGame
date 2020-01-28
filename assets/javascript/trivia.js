@@ -74,11 +74,15 @@ var userScore = 0;
 var whatQuestion = 0;
 var currListOfAnswers = [];
 var isQuestionAnswered = false;
+var divBeforeDelete = $('#main-container');
+var saveThisDiv;
 
+//timer stuff
+var intervalId = null;
+var time = 0;
 
 $(document).ready(function () {
-  var divBeforeDelete = $('#main-container');
-  var saveThisDiv;
+
   // ===============================================
   // GAME START
   // ===============================================
@@ -121,17 +125,13 @@ $(document).ready(function () {
       isQuestionAnswered = true;
       console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
       var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
-      //FIXME: it's pulling up btn-lg instead of 'a'
-      // var chosenAnswer = event.target.classList[3];
       var chosenAnswer = event.target.classList[5];
-
 
       if (correctAnswer === chosenAnswer) {
         console.log('winner!');
         userScore++;
         console.log('user score: ' + userScore);
         prependNewMessage('alert-success', 'Yay! you win!');
-        // $('#' + chosenAnswer).css('background-color', 'green');
         setTimeout(nextQuestion, 1 * 1000);
 
       } else {
