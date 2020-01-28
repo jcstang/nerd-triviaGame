@@ -18,7 +18,7 @@
   <!-- <script src="./assets/javascript/exper.js"></script> -->
   <!-- <script src="./assets/javascript/main.js"></script> -->
 </head>
-<body>
+<body class="game-body">
   <div class="container head">
     <h1>nerdy trivia game <span class="timer">00</span></h1>
     <button id="start-game" class="btn btn-outline-info" disabled>next question</button>
@@ -26,8 +26,10 @@
 
   <div class="container message"></div>
 
+
+
   <div id="main-container" class="container main">
-    <div class="jumbotron">
+    <div class="jumbotron" id="save-div">
       <!-- <h1 id="timer-area" class="display-5">game timer: </h1> -->
       <h1 id="question-area" class="display-3"></h1>
       <!-- <ul id="answer-area"></ul> -->
@@ -39,6 +41,9 @@
     </div>
     <h5>Progress</h5>
   </div>
+
+
+
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

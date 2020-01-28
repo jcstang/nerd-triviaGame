@@ -53,7 +53,8 @@ var isQuestionAnswered = false;
 
 
 $(document).ready(function () {
-
+  var divBeforeDelete = $('#main-container');
+  var saveThisDiv;
   // ===============================================
   // GAME START
   // ===============================================
@@ -66,6 +67,8 @@ $(document).ready(function () {
   $('#start-game').on('click', function () {
     nextQuestion();
   });
+
+  
 
   $('.a').on('click', function (event) {
     // answerHandler('a');
@@ -102,17 +105,19 @@ $(document).ready(function () {
       // var chosenAnswer = event.target.classList[3];
       var chosenAnswer = event.target.classList[5];
 
+      
       if (correctAnswer === chosenAnswer) {
         console.log('winner!');
         userScore++;
         console.log('user score: ' + userScore);
         prependNewMessage('alert-success', 'Yay! you win!');
-        setTimeout(nextQuestion, 5 * 1000);
+        // $('#' + chosenAnswer).css('background-color', 'green');
+        setTimeout(nextQuestion, 1 * 1000);
 
       } else {
         console.log('looooooooser!');
         prependNewMessage('alert-danger', 'NOPE! correct answer: ' + questionsForGame[whatQuestion].correctAnswer);
-        setTimeout(nextQuestion, 5 * 1000);
+        setTimeout(nextQuestion, 1 * 1000);
 
       }
     }
@@ -129,6 +134,7 @@ $(document).ready(function () {
   }
 
   function startTriviaGame() {
+    console.log('inside of startTriviaGame');
     userScore = 0;
     whatQuestion = 0;
     currListOfAnswers = [];
@@ -166,17 +172,50 @@ $(document).ready(function () {
     console.log("I'm the end of game handler.");
     //TODO: clear the div and replace with end of game div
     var endOfGameDiv = $('<div>');
-    endOfGameDiv.addClass('container');
-    var scoreH1 = $('<h1 class="end-game-div" > Game over! you scored: ' + userScore + '</h1>');
+    endOfGameDiv.addClass('container').attr('id', 'end-div');
+    var scoreH1 = $('<h1 class="end-game-div" > Game over! you scored: ' + userScore + ' out of ' + questionsForGame.length + '</h1>');
     endOfGameDiv.append(scoreH1);
-    $('#main-container').empty();
+    // $('#main-container').empty();
+    saveThisDiv = $('#save-div').detach();
+    console.log('saveThisDiv');
+    console.log(saveThisDiv);
     $('#main-container').append(endOfGameDiv);
 
     var resetBtn = $('<button>')
       .addClass('btn btn-outline-info')
       .attr('type', 'button')
+      .attr('id', 'reset-game')
       .text('Reset Game?');
     endOfGameDiv.append(resetBtn);
+    //TODO: connect logic to reset button
+    $('#reset-game').on('click', function() {
+      console.log('reset-game button pressed');
+      // createDiv();
+      console.log('saveThisDiv');
+      console.log(saveThisDiv);
+      $('.game-body').append(saveThisDiv);
+      startTriviaGame();
+    });
+  }
+
+  function createDiv() {
+
+    // THIS is really cool. I should have used this to clear out the main div
+    var endGameDiv = $('#end-div').detach();
+    console.log(endGameDiv);
+    
+
+    divBeforeDelete.addClass('container main').attr('id', 'main-container');
+    var jumboDiv = $('<div>').addClass('jumbotron');
+    var qAreah1 = $('<h1>').addClass('display-3').attr('id', 'question-area');
+    var ansAreaDiv = $('<div>').attr('id', 'answer-area');
+
+    //connecting puzzle piecies
+    jumboDiv.append(qAreah1);
+    jumboDiv.append(ansAreaDiv);
+    divBeforeDelete.append(jumboDiv);
+
+    $('.game-body').append(divBeforeDelete);
 
   }
 
