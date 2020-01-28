@@ -46,6 +46,7 @@
 //   }
 // ];
 
+// smaller test version
 let questionsForGame = [
   {
     question: "Who is gandalf?",
@@ -87,27 +88,22 @@ $(document).ready(function () {
   // ===============================================
   // EVENTS
   // ===============================================
-  $('#start-game').on('click', function () {
-    nextQuestion();
-  });
-
-  
   function setClickEvents() {
     $('.a').on('click', function (event) {
       // answerHandler('a');
       answerHandler(event);
     });
-  
+
     $('.b').on('click', function (event) {
       // answerHandler('b');
       answerHandler(event);
     });
-  
+
     $('.c').on('click', function (event) {
       // answerHandler('c');
       answerHandler(event);
     });
-  
+
     $('.d').on('click', function (event) {
       // answerHandler('d');
       answerHandler(event);
@@ -116,12 +112,10 @@ $(document).ready(function () {
   }
 
 
-
-
   // ===============================================
   // HELPER FUNCTIONS
   // ==============================================
-
+  
   function answerHandler(event) {
     if (!isQuestionAnswered) {
       isQuestionAnswered = true;
@@ -131,7 +125,7 @@ $(document).ready(function () {
       // var chosenAnswer = event.target.classList[3];
       var chosenAnswer = event.target.classList[5];
 
-      
+
       if (correctAnswer === chosenAnswer) {
         console.log('winner!');
         userScore++;
@@ -214,7 +208,7 @@ $(document).ready(function () {
       .text('Reset Game?');
     endOfGameDiv.append(resetBtn);
     //TODO: connect logic to reset button
-    $('#reset-game').on('click', function() {
+    $('#reset-game').on('click', function () {
       console.log('reset-game button pressed');
       createDiv();
       // console.log('saveThisDiv');
@@ -229,7 +223,7 @@ $(document).ready(function () {
     // THIS is really cool. I should have used this to clear out the main div
     var endGameDiv = $('#end-div').detach();
     console.log(endGameDiv);
-    
+
 
     divBeforeDelete.addClass('container main').attr('id', 'main-container');
     var jumboDiv = $('<div>').addClass('jumbotron');
@@ -293,6 +287,6 @@ $(document).ready(function () {
 
 
 
-
+// end of document.ready
 });
 
