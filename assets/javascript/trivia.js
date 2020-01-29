@@ -172,7 +172,6 @@ $(document).ready(function () {
   function answerHandler(event) {
     if (!isQuestionAnswered) {
       isQuestionAnswered = true;
-      // stop timer
       stopTimer();
       console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
       var correctAnswer = questionsForGame[whatQuestion].correctAnswer;
@@ -231,7 +230,7 @@ $(document).ready(function () {
     isQuestionAnswered = false;
     whatQuestion++;
 
-    resetTimer();
+    //resetTimer();
     
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
