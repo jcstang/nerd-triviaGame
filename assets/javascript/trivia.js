@@ -230,7 +230,7 @@ $(document).ready(function () {
     isQuestionAnswered = false;
     whatQuestion++;
 
-    //resetTimer();
+    resetTimer(); // 1. 
     
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
