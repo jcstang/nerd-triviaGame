@@ -3,50 +3,6 @@
 // Jan 2020
 
 // TODO: fill out the questions more.
-// let questionsForGame = [
-//   {
-//     question: "Who is gandalf?",
-//     answers: {
-//       a: "one of the hobbit guys",
-//       b: 'a wizard',
-//       c: 'Say what?...',
-//       d: 'idk, something Lord of The Rings'
-//     },
-//     correctAnswer: 'b'
-//   },
-//   {
-//     question: "Where did Harry Potter live outside of school?",
-//     answers: {
-//       a: 'hogwarts',
-//       b: 'some island',
-//       c: 'Say what?...',
-//       d: 'with the Durselys'
-//     },
-//     correctAnswer: 'd'
-//   },
-//   {
-//     question: "Who is my 3 year old daughter's favorite Doctor?",
-//     answers: {
-//       a: 'Peter Capaldi',
-//       b: 'Matt Smith',
-//       c: 'David Tennant',
-//       d: 'Jodie Whittaker'
-//     },
-//     correctAnswer: 'c'
-//   },
-//   {
-//     question: "In Star Wars, What powers ligthsabers?",
-//     answers: {
-//       a: 'Midichlorians',
-//       b: 'kyber crystals',
-//       c: 'the force',
-//       d: 'force crystals',
-//     },
-//     correctAnswer: 'b'
-//   }
-// ];
-
-// smaller test version
 let questionsForGame = [
   {
     question: "Who is gandalf?",
@@ -67,8 +23,52 @@ let questionsForGame = [
       d: 'with the Durselys'
     },
     correctAnswer: 'd'
+  },
+  {
+    question: "Who is my 3 year old daughter's favorite Doctor?",
+    answers: {
+      a: 'Peter Capaldi',
+      b: 'Matt Smith',
+      c: 'David Tennant',
+      d: 'Jodie Whittaker'
+    },
+    correctAnswer: 'c'
+  },
+  {
+    question: "In Star Wars, What powers ligthsabers?",
+    answers: {
+      a: 'Midichlorians',
+      b: 'kyber crystals',
+      c: 'the force',
+      d: 'force crystals',
+    },
+    correctAnswer: 'b'
   }
 ];
+
+// smaller test version
+// let questionsForGame = [
+//   {
+//     question: "Who is gandalf?",
+//     answers: {
+//       a: "one of the hobbit guys",
+//       b: 'a wizard',
+//       c: 'Say what?...',
+//       d: 'idk, something Lord of The Rings'
+//     },
+//     correctAnswer: 'b'
+//   },
+//   {
+//     question: "Where did Harry Potter live outside of school?",
+//     answers: {
+//       a: 'hogwarts',
+//       b: 'some island',
+//       c: 'Say what?...',
+//       d: 'with the Durselys'
+//     },
+//     correctAnswer: 'd'
+//   }
+// ];
 
 var userScore = 0;
 var whatQuestion = 0;
@@ -76,6 +76,7 @@ var currListOfAnswers = [];
 var isQuestionAnswered = false;
 var divBeforeDelete = $('#main-container');
 var saveThisDiv;
+var gameHasBeenWon = false;
 
 //timer stuff
 var intervalId = null;
@@ -170,7 +171,7 @@ $(document).ready(function () {
   // ===============================================
 
   function answerHandler(event) {
-    if (!isQuestionAnswered) {
+    if (!isQuestionAnswered && !gameHasBeenWon) {
       isQuestionAnswered = true;
       stopTimer();
       console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
@@ -237,13 +238,17 @@ $(document).ready(function () {
       clearGameArea();
       loadQuestionAndAnswers();
     } else {
+      
+      if(!gameHasBeenWon) {
+        endOfGameHandler();
+      }
       // console.log('end of game?');
-      endOfGameHandler();
     }
   }
 
 
   function endOfGameHandler() {
+    gameHasBeenWon = true;
     // clear questions and answers
     // display reset button.
     // display results of game. score, etc.
