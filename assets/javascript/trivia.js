@@ -76,7 +76,6 @@ var currListOfAnswers = [];
 var isQuestionAnswered = false;
 var divBeforeDelete = $('#main-container');
 var saveThisDiv;
-var gameHasBeenWon = false;
 
 //timer stuff
 var intervalId = null;
@@ -149,6 +148,9 @@ $(document).ready(function () {
 
     intervalId = setInterval(count, 1 * 1000);
 
+      console.log('time created', intervalId)
+
+
   }
 
   function stopTimer() {
@@ -160,6 +162,7 @@ $(document).ready(function () {
 
   function resetTimer() {
     time = 11;
+    stopTimer()
     startTimer();
   }
 
@@ -171,7 +174,7 @@ $(document).ready(function () {
   // ===============================================
 
   function answerHandler(event) {
-    if (!isQuestionAnswered && !gameHasBeenWon) {
+    if (!isQuestionAnswered) {
       isQuestionAnswered = true;
       stopTimer();
       console.log('you chose: ' + event.target.classList[5] + ' curr corect answer: ' + questionsForGame[whatQuestion].correctAnswer);
@@ -231,24 +234,20 @@ $(document).ready(function () {
     isQuestionAnswered = false;
     whatQuestion++;
 
-    resetTimer(); // 1. 
-    
+    resetTimer(); // 1.
+
     console.log('what question: ' + whatQuestion + ' < ' + questionsForGame.length);
     if (whatQuestion < questionsForGame.length) {
       clearGameArea();
       loadQuestionAndAnswers();
     } else {
-      
-      if(!gameHasBeenWon) {
-        endOfGameHandler();
-      }
-      // console.log('end of game?');
+      endOfGameHandler();
     }
   }
 
 
   function endOfGameHandler() {
-    gameHasBeenWon = true;
+    stopTimer()
     // clear questions and answers
     // display reset button.
     // display results of game. score, etc.
@@ -274,9 +273,12 @@ $(document).ready(function () {
     $('#reset-game').on('click', function () {
       console.log('reset-game button pressed');
       createDiv();
-      // console.log('saveThisDiv');
-      // console.log(saveThisDiv);
-      // $('.game-body').append(saveThisDiv);
+
+     // window.location = window.location refreshes the page content without doing a hard reload
+     // this is the 'wokring' solution to resetting the game
+     // now that the timer issue is fixed, there are some game reset issues that appear
+    // e.g. questions array has 2x questions, win conditions are doubly appended, etc. 
+       window.location = window.location
       startTriviaGame();
     });
   }
@@ -352,4 +354,3 @@ $(document).ready(function () {
 
   // end of document.ready
 });
-
